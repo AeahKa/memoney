@@ -1,12 +1,6 @@
 <template>
 	<div id="app">
 		<router-view />
-		<hr />
-		<div>
-			<router-link to="/statement">明细</router-link>|
-			<router-link to="/add">记账</router-link>|
-			<router-link to="/settings">设置</router-link>
-		</div>
 	</div>
 </template>
 
