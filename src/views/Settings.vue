@@ -1,14 +1,13 @@
 <template>
-	<div>
-		Settings
-		<Nav />
-	</div>
+  <div>
+    <Layout>
+      <div>Settings</div>
+    </Layout>
+  </div>
 </template>
 
 <script lang="ts">
 export default {
-	name: 'Settings',
-}
+  name: "Settings",
+};
 </script>
-
-<style scoped></style>
