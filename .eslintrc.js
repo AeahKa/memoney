@@ -16,6 +16,9 @@ module.exports = {
 		'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
 		'vue/multi-word-component-names': 'off',
 	},
+	globals: {
+		__WebpackModuleApi: 'writable',
+	},
 	overrides: [
 		{
 			files: [

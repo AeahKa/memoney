@@ -24,6 +24,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~@/assets/style/helper.scss";
+
 nav {
   display: flex;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
@@ -43,8 +45,8 @@ nav {
     }
   }
   > .item.selected {
-    color: #e8cba1;
-    fill: #e8cba1;
+    color: $col-selected;
+    fill: $col-selected;
   }
 }
 </style>
