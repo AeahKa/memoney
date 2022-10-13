@@ -1,13 +1,19 @@
 <template>
   <div>
+    {{ value }}
     <label class="remark">
-      <input type="text" placeholder="备注" />
+      <input type="text" v-model="value" placeholder="备注" />
     </label>
   </div>
 </template>
 
 <script lang="ts">
-export default {};
+import Vue from "vue";
+import { Component } from "vue-property-decorator";
+@Component
+export default class Remark extends Vue {
+  value = "";
+}
 </script>
 
 <style lang="scss" scoped>
