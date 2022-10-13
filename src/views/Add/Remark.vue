@@ -1,6 +1,5 @@
 <template>
   <div>
-    {{ value }}
     <label class="remark">
       <input type="text" v-model="value" placeholder="备注" />
     </label>
