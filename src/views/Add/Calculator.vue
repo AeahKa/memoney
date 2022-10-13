@@ -1,19 +1,57 @@
 <template>
   <div class="calculator">
-    <div class="display">100</div>
+    <div class="display">{{ output }}</div>
     <div class="keyboard clearfix">
-      <button>7</button><button>8</button><button>9</button><button>÷</button
-      ><button>Del</button> <button>4</button><button>5</button
-      ><button>6</button><button>×</button><button>C</button><button>1</button
-      ><button>2</button><button>3</button><button>-</button
-      ><button class="ok">OK</button><button>%</button><button>0</button
-      ><button>.</button><button>+</button>
+      <button @click="input">7</button><button @click="input">8</button
+      ><button @click="input">9</button><button>÷</button
+      ><button @click="backSpace">Del</button> <button @click="input">4</button
+      ><button @click="input">5</button><button @click="input">6</button
+      ><button>×</button><button @click="clear">C</button
+      ><button @click="input">1</button><button @click="input">2</button
+      ><button @click="input">3</button><button>-</button
+      ><button class="ok">OK</button><button>%</button
+      ><button @click="input">0</button><button @click="input">.</button
+      ><button>+</button>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-export default {};
+import Vue from "vue";
+import { Component } from "vue-property-decorator";
+@Component
+export default class Calculator extends Vue {
+  output = "0";
+  input(event: MouseEvent) {
+    const button = event.target as HTMLButtonElement;
+    const input = button.textContent!;
+    if (this.output.length === 16) {
+      return;
+    }
+    if (this.output === "0") {
+      if (input !== ".") {
+        this.output = input;
+      } else {
+        this.output += button.textContent;
+      }
+      return;
+    }
+    if (this.output.indexOf(".") >= 0 && input === ".") {
+      return;
+    }
+    this.output += button.textContent;
+  }
+  backSpace() {
+    if (this.output.length === 1) {
+      this.output = "0";
+    } else {
+      this.output = this.output.slice(0, -1);
+    }
+  }
+  clear() {
+    this.output = "0";
+  }
+}
 </script>
 
 <style lang="scss" scoped>
