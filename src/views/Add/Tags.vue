@@ -18,7 +18,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { Component, Prop } from "vue-property-decorator";
+import { Component, Prop, Watch } from "vue-property-decorator";
 @Component
 export default class Tags extends Vue {
   @Prop(Array) readonly dataSource: string[] | undefined;
@@ -30,6 +30,7 @@ export default class Tags extends Vue {
     } else {
       this.selectedTags.splice(index, 1);
     }
+    this.$emit("xxx", this.selectedTags);
   }
   newTag() {
     const name = window.prompt("请输入标签名");
@@ -40,6 +41,10 @@ export default class Tags extends Vue {
     } else {
       window.alert("标签名不能为空");
     }
+  }
+  @Watch("selectedTags")
+  onValueChanged(value: string[]) {
+    this.$emit("update:value", value);
   }
 }
 </script>

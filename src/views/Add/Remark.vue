@@ -7,11 +7,15 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import { Component } from "vue-property-decorator";
+import Vue, { watch } from "vue";
+import { Component, Watch } from "vue-property-decorator";
 @Component
 export default class Remark extends Vue {
   value = "";
+  @Watch("value")
+  onValueChanged(value: string) {
+    this.$emit("update:value", value);
+  }
 }
 </script>
 

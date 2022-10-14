@@ -9,7 +9,7 @@
       ><button>×</button><button @click="clear">C</button
       ><button @click="input">1</button><button @click="input">2</button
       ><button @click="input">3</button><button>-</button
-      ><button class="ok">OK</button><button>%</button
+      ><button class="save" @click="save">完成</button><button>%</button
       ><button @click="input">0</button><button @click="input">.</button
       ><button>+</button>
     </div>
@@ -51,6 +51,9 @@ export default class Calculator extends Vue {
   clear() {
     this.output = "0";
   }
+  save() {
+    this.$emit("update:value", this.output);
+  }
 }
 </script>
 
@@ -72,7 +75,7 @@ export default class Calculator extends Vue {
   > .keyboard {
     button {
       @extend %clearfix;
-      &.ok {
+      &.save {
         height: 36vw;
         float: right;
       }
