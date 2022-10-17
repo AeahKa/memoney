@@ -1,7 +1,6 @@
 <template>
   <div>
     <Layout classPrefix="layout">
-      {{ bill }}
       <calculator @update:value="onUpdateAmount" @submit="submit" />
       <type :value.sync="bill.type" />
       <remark @update:value="onUpdateRemark" />
@@ -17,13 +16,10 @@ import Calculator from "./Add/Calculator.vue";
 import Remark from "./Add/Remark.vue";
 import Tags from "./Add/Tags.vue";
 import Type from "./Add/Type.vue";
+import model from "../views/model";
+import Bill from "../custom";
 
-type Bill = {
-  tags: string[] | undefined;
-  remark: string;
-  type: string;
-  amount: number;
-};
+const billList = model.fetch();
 
 @Component({
   components: { Calculator, Type, Remark, Tags },
@@ -32,7 +28,7 @@ export default class Add extends Vue {
   name = "Add";
 
   tags = ["衣", "食", "住", "行"];
-  billList: Bill[] = [];
+  billList = billList;
   bill: Bill = {
     tags: [],
     remark: "",
@@ -50,14 +46,14 @@ export default class Add extends Vue {
     this.bill.amount = parseFloat(value);
   }
   submit() {
-    const billCopy = JSON.parse(JSON.stringify(this.bill));
-    this.billList.push(billCopy);
-    console.log(this.billList);
+    const billCopy: Bill = model.copy(this.bill);
+    billCopy.createdAt = new Date();
+    billList.push(billCopy);
   }
 
   @Watch("billList")
   onBillListChanged() {
-    window.localStorage.setItem("billList", JSON.stringify(this.billList));
+    model.save(this.billList);
   }
 }
 </script>
