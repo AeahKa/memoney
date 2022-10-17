@@ -37,8 +37,8 @@ nav {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    color: #707070;
-    fill: #707070;
+    color: $col-icon;
+    fill: $col-icon;
     .icon {
       width: 36px;
       height: 36px;

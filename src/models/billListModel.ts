@@ -1,6 +1,6 @@
 import Bill from '../custom'
 const localStorageKeyName = 'billList'
-const model = {
+const billListModel = {
 	copy(data: Bill[] | Bill) {
 		return JSON.parse(JSON.stringify(data))
 	},
@@ -13,4 +13,4 @@ const model = {
 		window.localStorage.setItem(localStorageKeyName, JSON.stringify(data))
 	},
 }
-export default model
+export default billListModel

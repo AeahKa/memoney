@@ -16,10 +16,13 @@ import Calculator from "./Add/Calculator.vue";
 import Remark from "./Add/Remark.vue";
 import Tags from "./Add/Tags.vue";
 import Type from "./Add/Type.vue";
-import model from "../views/model";
+import billListModel from "../models/billListModel";
+import tagListModel from "../models/tagListModel";
+
 import Bill from "../custom";
 
-const billList = model.fetch();
+const billList = billListModel.fetch();
+const tagList = tagListModel.fetch();
 
 @Component({
   components: { Calculator, Type, Remark, Tags },
@@ -27,7 +30,7 @@ const billList = model.fetch();
 export default class Add extends Vue {
   name = "Add";
 
-  tags = ["衣", "食", "住", "行"];
+  tags = tagList;
   billList = billList;
   bill: Bill = {
     tags: [],
@@ -46,14 +49,14 @@ export default class Add extends Vue {
     this.bill.amount = parseFloat(value);
   }
   submit() {
-    const billCopy: Bill = model.copy(this.bill);
+    const billCopy: Bill = billListModel.copy(this.bill);
     billCopy.createdAt = new Date();
     billList.push(billCopy);
   }
 
   @Watch("billList")
   onBillListChanged() {
-    model.save(this.billList);
+    billListModel.save(this.billList);
   }
 }
 </script>

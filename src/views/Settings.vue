@@ -1,13 +1,80 @@
+import Tags from './Add/Tags.vue';
+
 <template>
   <div>
     <Layout>
-      <div>Settings</div>
+      <ol class="tags">
+        <li v-for="tag in tags" :key="tag">
+          <span>{{ tag }}</span>
+          <icon name="right-arrow" />
+        </li>
+      </ol>
+      <div class="newTag-wrapper">
+        <button class="newTag" @click="newTag">新建标签</button>
+      </div>
     </Layout>
   </div>
 </template>
 
+
 <script lang="ts">
-export default {
-  name: "Settings",
-};
+import Vue from "vue";
+import { Component } from "vue-property-decorator";
+import tagListModel from "../models/tagListModel";
+tagListModel.fetch();
+@Component
+export default class Tags extends Vue {
+  tags = tagListModel.data;
+  name = "Settings";
+  newTag() {
+    const name = window.prompt("请输入标签名") as string;
+    if (name) {
+      try {
+        tagListModel.new(name);
+      } catch (error: any) {
+        if (error.message === "duplicated") {
+          window.alert("无法重复创建相同标签！");
+        }
+      }
+    } else {
+      window.alert("标签名不能为空");
+    }
+  }
+}
 </script>
+
+
+<style lang="scss" scoped>
+@import "~@/assets/style/helper.scss";
+.tags {
+  background: rgb(248, 248, 248);
+  font-size: 16px;
+  padding-left: 16px;
+
+  > li {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #e6e6e6;
+    > svg {
+      fill: $col-icon;
+      height: 20px;
+      width: 20px;
+      margin-right: 16px;
+    }
+  }
+}
+.newTag {
+  background: #767676;
+  color: #e6e6e6;
+  border: none;
+  border-radius: 4px;
+  padding: 0 16px;
+  height: 40px;
+  &-wrapper {
+    text-align: center;
+    padding: 16px;
+  }
+}
+</style>
