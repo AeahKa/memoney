@@ -1,0 +1,54 @@
+<template>
+  <div>
+    <label class="formItem">
+      <span class="name">{{ this.fieldName }}</span>
+      <input
+        type="text"
+        v-model="value"
+        :content="this.content"
+        :placeholder="this.placeHolder"
+      />
+    </label>
+  </div>
+</template>
+
+<script lang="ts">
+import Vue from "vue";
+import { Component, Watch, Prop } from "vue-property-decorator";
+
+@Component
+export default class FormItem extends Vue {
+  value = this.content;
+  @Prop({ required: false }) fieldName?: string | undefined;
+  @Prop({ required: false }) placeHolder?: string | undefined;
+  @Prop({ required: false }) content?: string;
+  @Watch("value")
+  onValueChanged(value: string) {
+    this.$emit("update:value", value);
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+@import "~@/assets/style/helper.scss";
+.formItem {
+  background: #f5f5f5;
+  display: flex;
+  flex-flow: wrap;
+  padding: 0 16px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  > .name {
+  }
+  > input {
+    display: flex;
+    flex-grow: 1;
+    background: transparent;
+    border: none;
+    color: #333;
+    padding: 16px 0;
+    // width: 100%;
+  }
+}
+</style>

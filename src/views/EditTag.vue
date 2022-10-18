@@ -1,12 +1,26 @@
 <template>
-  <layout>editTag</layout>
+  <div>
+    <layout class="layout">
+      <div class="head">
+        <icon name="left-arrow" />
+        <span>编辑标签</span>
+      </div>
+
+      <editing fieldName="标签名：" content="this.tag.name" />
+
+      <div>
+        <button>删除标签</button>
+      </div>
+    </layout>
+  </div>
 </template>
 
 <script lang="ts">
 import tagListModel from "@/models/tagListModel";
+import Editing from "@/components/FormItem.vue";
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
-@Component
+@Component({ components: { Editing } })
 export default class Tags extends Vue {
   created() {
     const id = this.$route.params.id;
@@ -24,40 +38,30 @@ export default class Tags extends Vue {
 
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
-.tags {
-  font-size: 14px;
-  padding: 16px;
-  flex-grow: 1;
+.layout-content {
   display: flex;
-  flex-flow: column-reverse;
-  > .current {
-    display: flex;
-    flex-wrap: wrap;
-    overflow: auto;
-    > li {
-      $h: 24px;
-      height: $h;
-      display: flex;
-      align-items: center;
-      background: #d9d9d9;
-      border-radius: $h/2;
-      padding: 0 16px;
-      margin-right: 12px;
-      margin-top: 4px;
-      &.selected {
-        background: $col-selected;
-      }
-    }
+  flex-flow: column;
+}
+.head {
+  background: rgb(248, 248, 248);
+  font-size: 16px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  border-bottom: 1px solid #e6e6e6;
+  > svg {
+    margin-left: 16px;
+    border: $bor1;
+    fill: $col-icon;
+    height: 20px;
+    width: 20px;
   }
-  > .newTag {
-    margin-top: 16px;
-    button {
-      background: transparent;
-      border: none;
-      color: #999;
-      border-bottom: 1px solid;
-      padding: 0 4px;
-    }
+  > span {
+    border: $bor1;
+    position: absolute;
+    width: 100vw;
+    text-align: center;
   }
 }
 </style>

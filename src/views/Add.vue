@@ -3,7 +3,7 @@
     <Layout classPrefix="layout">
       <calculator @update:value="onUpdateAmount" @submit="submit" />
       <type :value.sync="bill.type" />
-      <remark @update:value="onUpdateRemark" />
+      <remark @update:value="onUpdateRemark" placeHolder="备注" />
       <tags :data-source.sync="tags" @update:value="onUpdateTags" />
     </Layout>
   </div>
@@ -13,7 +13,7 @@
 import Vue from "vue";
 import { Component, Watch } from "vue-property-decorator";
 import Calculator from "./Add/Calculator.vue";
-import Remark from "./Add/Remark.vue";
+import Remark from "../components/FormItem.vue";
 import Tags from "./Add/Tags.vue";
 import Type from "./Add/Type.vue";
 import billListModel from "../models/billListModel";
