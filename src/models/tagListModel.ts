@@ -1,6 +1,10 @@
 const localStorageKeyName = 'tagList'
+type Tag = {
+	id: string
+	name: string
+}
 const tagListModel = {
-	data: [] as string[],
+	data: [] as Tag[],
 	fetch() {
 		this.data = JSON.parse(
 			window.localStorage.getItem(localStorageKeyName) || '[]'
@@ -8,11 +12,11 @@ const tagListModel = {
 		return this.data
 	},
 	new(name: string) {
-		if (this.data.indexOf(name) >= 0) {
+		const tagNames = this.data.map((item) => item.name)
+		if (tagNames.indexOf(name) >= 0) {
 			throw new Error('duplicated')
-			// return 'duplicated'
 		} else {
-			this.data.push(name)
+			this.data.push({ id: name, name: name })
 			this.save()
 		}
 	},
