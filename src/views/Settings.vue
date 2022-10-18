@@ -3,12 +3,17 @@ import Tags from './Add/Tags.vue';
 <template>
   <div>
     <Layout>
-      <ol class="tags">
-        <li v-for="tag in tags" :key="tag.id">
+      <div class="tags">
+        <router-link
+          class="tag"
+          v-for="tag in tags"
+          :key="tag.id"
+          :to="`/settings/edit/${tag.id}`"
+        >
           <span>{{ tag.name }}</span>
           <icon name="right-arrow" />
-        </li>
-      </ol>
+        </router-link>
+      </div>
       <div class="newTag-wrapper">
         <button class="newTag" @click="newTag">新建标签</button>
       </div>
@@ -51,7 +56,7 @@ export default class Tags extends Vue {
   font-size: 16px;
   padding-left: 16px;
 
-  > li {
+  > .tag {
     min-height: 44px;
     display: flex;
     align-items: center;
