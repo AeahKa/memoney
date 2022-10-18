@@ -3,7 +3,11 @@
     <Layout classPrefix="layout">
       <calculator @update:value="onUpdateAmount" @submit="submit" />
       <type :value.sync="bill.type" />
-      <remark @update:value="onUpdateRemark" placeHolder="备注" />
+      <remark
+        class="remark"
+        @update:value="onUpdateRemark"
+        placeHolder="备注"
+      />
       <tags :data-source.sync="tags" @update:value="onUpdateTags" />
     </Layout>
   </div>
@@ -70,4 +74,7 @@ export default class Add extends Vue {
 
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
+.remark {
+  background: #f5f5f5;
+}
 </style>

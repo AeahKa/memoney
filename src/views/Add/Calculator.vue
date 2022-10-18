@@ -84,6 +84,7 @@ export default class Calculator extends Vue {
       width: 20vw;
       height: 18vw;
       float: left;
+      color: #515151;
       background: rgba(51, 51, 51, 0.034);
       border: none;
       font-size: 22px;

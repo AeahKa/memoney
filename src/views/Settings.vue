@@ -1,5 +1,3 @@
-import Tags from './Add/Tags.vue';
-
 <template>
   <div>
     <Layout>
@@ -14,8 +12,8 @@ import Tags from './Add/Tags.vue';
           <icon name="right-arrow" />
         </router-link>
       </div>
-      <div class="newTag-wrapper">
-        <button class="newTag" @click="newTag">新建标签</button>
+      <div class="button-wrapper">
+        <Button class="newTag" @click.native="newTag">新建标签</Button>
       </div>
     </Layout>
   </div>
@@ -26,8 +24,11 @@ import Tags from './Add/Tags.vue';
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
 import tagListModel from "../models/tagListModel";
+import Button from "../components/Button.vue";
 tagListModel.fetch();
-@Component
+@Component({
+  components: { Button },
+})
 export default class Tags extends Vue {
   tags = tagListModel.data;
   name = "Settings";
@@ -70,16 +71,8 @@ export default class Tags extends Vue {
     }
   }
 }
-.newTag {
-  background: #767676;
-  color: #e6e6e6;
-  border: none;
-  border-radius: 4px;
-  padding: 0 16px;
-  height: 40px;
-  &-wrapper {
-    text-align: center;
-    padding: 16px;
-  }
+.button-wrapper {
+  text-align: center;
+  padding: 16px;
 }
 </style>

@@ -32,15 +32,12 @@ export default class FormItem extends Vue {
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
 .formItem {
-  background: #f5f5f5;
   display: flex;
   flex-flow: wrap;
   padding: 0 16px;
   font-size: 16px;
   display: flex;
   align-items: center;
-  > .name {
-  }
   > input {
     display: flex;
     flex-grow: 1;
@@ -48,7 +45,6 @@ export default class FormItem extends Vue {
     border: none;
     color: #333;
     padding: 16px 0;
-    // width: 100%;
   }
 }
 </style>

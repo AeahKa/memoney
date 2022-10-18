@@ -3,13 +3,11 @@
     <layout class="layout">
       <div class="head">
         <icon name="left-arrow" />
-        <span>编辑标签</span>
+        <span class="title">编辑标签</span>
       </div>
-
-      <editing fieldName="标签名：" content="this.tag.name" />
-
-      <div>
-        <button>删除标签</button>
+      <editing class="editing" fieldName="标签名：" content="this.tag.name" />
+      <div class="button-wrapper">
+        <Button>删除标签</Button>
       </div>
     </layout>
   </div>
@@ -18,9 +16,11 @@
 <script lang="ts">
 import tagListModel from "@/models/tagListModel";
 import Editing from "@/components/FormItem.vue";
+import Button from "../components/Button.vue";
+
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
-@Component({ components: { Editing } })
+@Component({ components: { Editing, Button } })
 export default class Tags extends Vue {
   created() {
     const id = this.$route.params.id;
@@ -43,25 +43,30 @@ export default class Tags extends Vue {
   flex-flow: column;
 }
 .head {
-  background: rgb(248, 248, 248);
+  background: white;
   font-size: 16px;
-  min-height: 44px;
+  padding: 12px 16px;
   display: flex;
   align-items: center;
   text-align: center;
   border-bottom: 1px solid #e6e6e6;
   > svg {
-    margin-left: 16px;
-    border: $bor1;
+    position: absolute;
     fill: $col-icon;
     height: 20px;
     width: 20px;
   }
-  > span {
-    border: $bor1;
-    position: absolute;
+  > .title {
     width: 100vw;
     text-align: center;
   }
+}
+.editing {
+  margin-top: 8px;
+  background: white;
+}
+.button-wrapper {
+  text-align: center;
+  padding: 16px;
 }
 </style>

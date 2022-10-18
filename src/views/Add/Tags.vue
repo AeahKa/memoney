@@ -51,6 +51,7 @@ export default class Tags extends Vue {
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
 .tags {
+  background: white;
   font-size: 14px;
   padding: 16px;
   flex-grow: 1;
@@ -69,7 +70,7 @@ export default class Tags extends Vue {
       border-radius: $h/2;
       padding: 0 16px;
       margin-right: 12px;
-      margin-top: 4px;
+      margin-top: 8px;
       &.selected {
         background: $col-selected;
       }
