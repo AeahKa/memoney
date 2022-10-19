@@ -5,9 +5,9 @@
         <icon name="left-arrow" />
         <span class="title">编辑标签</span>
       </div>
-      <editing class="editing" fieldName="标签名：" content="this.tag.name" />
+      <editing class="editing" fieldName="标签名：" :content="this.tag.name" />
       <div class="button-wrapper">
-        <Button>删除标签</Button>
+        <Button @click="remove">删除标签</Button>
       </div>
     </layout>
   </div>
@@ -21,14 +21,15 @@ import Button from "../components/Button.vue";
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
 @Component({ components: { Editing, Button } })
-export default class Tags extends Vue {
+export default class EditTag extends Vue {
+  tag?: { id: string; name: string } = undefined;
   created() {
     const id = this.$route.params.id;
     tagListModel.fetch();
     const tags = tagListModel.data;
     const tag = tags.filter((t) => t.id === id)[0];
     if (tag) {
-      console.log(tag);
+      this.tag = tag;
     } else {
       this.$router.replace("/404");
     }
