@@ -1,9 +1,7 @@
 import copy from '@/lib/copy'
-import Bill from '../custom'
 const localStorageKeyName = 'billList'
 const billListModel = {
 	data: [] as Bill[],
-
 	new(bill: Bill) {
 		const billCopy: Bill = copy(bill)
 		billCopy.createdAt = new Date()

@@ -1,9 +1,14 @@
-declare type Bill = {
+type Bill = {
 	tags: string[] | undefined
 	remark: string
 	type: string
 	amount: number
 	createdAt?: Date
 }
-
-export default Bill
+type Tag = {
+	id: string
+	name: string
+}
+interface Window {
+	tagList: Tag[]
+}
