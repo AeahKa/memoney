@@ -28,16 +28,15 @@ const tagListModel = {
 		if (idList.indexOf(id) >= 0) {
 			const names = this.data.map((item) => item.name)
 			if (names.indexOf(name) >= 0) {
-				return 'duplication'
+				return 'duplicated'
 			} else {
 				const tag = this.data.filter((item) => item.id === id)[0]
-				tag.id = name
 				tag.name = name
 				if (name === '') {
 					return 'not found'
 				} else {
 					this.save()
-					return 'success'
+					return 'succeed'
 				}
 			}
 		} else {

@@ -21,7 +21,6 @@ import Remark from "../components/FormItem.vue";
 import Tags from "./Add/Tags.vue";
 import Type from "./Add/Type.vue";
 import billListModel from "../models/billListModel";
-import tagListModel from "../models/tagListModel";
 
 const billList = billListModel.fetch();
 

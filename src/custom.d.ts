@@ -11,5 +11,11 @@ type Tag = {
 }
 interface Window {
 	tagList: Tag[]
+	findTag: (id: string) => Tag | undefined
 	newTag: (name: string) => void
+	removeTag: (id: string) => boolean
+	updateTag: (
+		id: string,
+		name: string
+	) => 'succeed' | 'not found' | 'duplicated'
 }
