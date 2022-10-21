@@ -1,4 +1,4 @@
-type Bill = {
+declare type Bill = {
 	tags: string[] | undefined
 	remark: string
 	type: string
