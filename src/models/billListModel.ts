@@ -1,10 +1,13 @@
+import copy from '@/lib/copy'
 import Bill from '../custom'
 const localStorageKeyName = 'billList'
 const billListModel = {
 	data: [] as Bill[],
 
-	copy(data: Bill[] | Bill) {
-		return JSON.parse(JSON.stringify(data))
+	new(bill: Bill) {
+		const billCopy: Bill = copy(bill)
+		billCopy.createdAt = new Date()
+		this.data.push(billCopy)
 	},
 	fetch() {
 		this.data = JSON.parse(

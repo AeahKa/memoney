@@ -53,14 +53,12 @@ export default class Add extends Vue {
     this.bill.amount = parseFloat(value);
   }
   submit() {
-    const billCopy: Bill = billListModel.copy(this.bill);
-    billCopy.createdAt = new Date();
-    billList.push(billCopy);
+    billListModel.new(this.bill);
   }
 
   @Watch("billList")
   onBillListChanged() {
-    billListModel.save(this.billList);
+    billListModel.save();
   }
 }
 </script>
