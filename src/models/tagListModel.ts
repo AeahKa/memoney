@@ -15,11 +15,12 @@ const tagListModel = {
 	new(name: string) {
 		const tagNames = this.data.map((item) => item.name)
 		if (tagNames.indexOf(name) >= 0) {
-			throw new Error('duplicated')
+			return 'duplicated'
 		} else {
 			const id = createId().toString()
 			this.data.push({ id: id, name: name })
 			this.save()
+			return 'succeed'
 		}
 	},
 	update(id: string, name: string) {

@@ -35,10 +35,8 @@ export default class Tags extends Vue {
   }
   newTag() {
     const name = window.prompt("请输入标签名") as string;
-    if (name !== "") {
-      tagListModel.new(name);
-    } else {
-      window.alert("标签名不能为空");
+    if (name) {
+      window.newTag(name);
     }
   }
   @Watch("selectedTags")
