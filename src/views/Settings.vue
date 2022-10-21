@@ -30,7 +30,7 @@ tagListModel.fetch();
   components: { Button },
 })
 export default class Tags extends Vue {
-  tags = tagListModel.data;
+  tags = window.tagList;
   name = "Settings";
   newTag() {
     const name = window.prompt("请输入标签名") as string;

@@ -24,15 +24,6 @@ import billListModel from "../models/billListModel";
 import tagListModel from "../models/tagListModel";
 
 const billList = billListModel.fetch();
-const tagList = tagListModel.fetch();
-
-type Bill = {
-  tags: string[] | undefined;
-  remark: string;
-  type: string;
-  amount: number;
-  createdAt?: Date;
-};
 
 @Component({
   components: { Calculator, Type, Remark, Tags },
@@ -40,7 +31,7 @@ type Bill = {
 export default class Add extends Vue {
   name = "Add";
 
-  tags = tagList;
+  tags = window.tagList;
   billList = billList;
   bill: Bill = {
     tags: [],
