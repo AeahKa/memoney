@@ -6,6 +6,7 @@ const billListModel = {
 		const billCopy: Bill = copy(bill)
 		billCopy.createdAt = new Date()
 		this.data.push(billCopy)
+		this.save()
 	},
 	fetch() {
 		this.data = JSON.parse(

@@ -15,14 +15,11 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { Component, Watch } from "vue-property-decorator";
+import { Component } from "vue-property-decorator";
 import Calculator from "./Add/Calculator.vue";
 import Remark from "../components/FormItem.vue";
 import Tags from "./Add/Tags.vue";
 import Type from "./Add/Type.vue";
-import billListModel from "../models/billListModel";
-
-const billList = billListModel.fetch();
 
 @Component({
   components: { Calculator, Type, Remark, Tags },
@@ -31,7 +28,7 @@ export default class Add extends Vue {
   name = "Add";
 
   tags = window.tagList;
-  billList = billList;
+  billList = window.billList;
   bill: Bill = {
     tags: [],
     remark: "",
@@ -49,12 +46,7 @@ export default class Add extends Vue {
     this.bill.amount = parseFloat(value);
   }
   submit() {
-    billListModel.new(this.bill);
-  }
-
-  @Watch("billList")
-  onBillListChanged() {
-    billListModel.save();
+    window.newBill(this.bill);
   }
 }
 </script>

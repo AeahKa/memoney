@@ -18,4 +18,6 @@ interface Window {
 		id: string,
 		name: string
 	) => 'succeed' | 'not found' | 'duplicated'
+	billList: Bill[]
+	newBill: (bill: Bill) => void
 }
