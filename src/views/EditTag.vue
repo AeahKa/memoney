@@ -22,27 +22,28 @@
 <script lang="ts">
 import Editing from "@/components/FormItem.vue";
 import Button from "../components/Button.vue";
-
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
+import store from "../store/index2";
+
 @Component({ components: { Editing, Button } })
 export default class EditTag extends Vue {
   tag?: { id: string; name: string } = undefined;
 
   created() {
-    this.tag = window.findTag(this.$route.params.id);
+    this.tag = store.findTag(this.$route.params.id);
     if (!this.tag) {
       this.$router.replace("/404");
     }
   }
   update(name: string) {
     if (this.tag) {
-      window.updateTag(this.tag.id, name);
+      store.updateTag(this.tag.id, name);
     }
   }
   remove() {
     if (this.tag) {
-      if (window.removeTag(this.tag.id)) {
+      if (store.removeTag(this.tag.id)) {
         alert("已删除标签");
         this.$router.back();
       }

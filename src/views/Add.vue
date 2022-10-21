@@ -20,6 +20,7 @@ import Calculator from "./Add/Calculator.vue";
 import Remark from "../components/FormItem.vue";
 import Tags from "./Add/Tags.vue";
 import Type from "./Add/Type.vue";
+import store from "../store/index2";
 
 @Component({
   components: { Calculator, Type, Remark, Tags },
@@ -27,8 +28,8 @@ import Type from "./Add/Type.vue";
 export default class Add extends Vue {
   name = "Add";
 
-  tags = window.tagList;
-  billList = window.billList;
+  tags = store.tagList;
+  billList = store.billList;
   bill: Bill = {
     tags: [],
     remark: "",
@@ -46,7 +47,7 @@ export default class Add extends Vue {
     this.bill.amount = parseFloat(value);
   }
   submit() {
-    window.newBill(this.bill);
+    store.newBill(this.bill);
   }
 }
 </script>
