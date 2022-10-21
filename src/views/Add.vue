@@ -8,7 +8,7 @@
         @update:value="onUpdateRemark"
         placeHolder="备注"
       />
-      <tags :data-source.sync="tags" @update:value="onUpdateTags" />
+      <tags :data-source.sync="tags" @update:value="UpdateTag" />
     </Layout>
   </div>
 </template>

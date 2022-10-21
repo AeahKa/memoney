@@ -2,10 +2,15 @@
   <div>
     <layout class="layout">
       <div class="head">
-        <icon name="left-arrow" />
+        <icon name="left-arrow" @click.native="goBack" />
         <span class="title">编辑标签</span>
       </div>
-      <editing class="editing" fieldName="标签名：" :content="this.tag.name" />
+      <editing
+        class="editing"
+        fieldName="标签名："
+        :content="this.tag.name"
+        @update:value="update"
+      />
       <div class="button-wrapper">
         <Button @click="remove">删除标签</Button>
       </div>
@@ -33,6 +38,22 @@ export default class EditTag extends Vue {
     } else {
       this.$router.replace("/404");
     }
+  }
+  update(name: string) {
+    if (this.tag) {
+      tagListModel.update(this.tag.id, name);
+    }
+  }
+  remove() {
+    if (this.tag) {
+      if (tagListModel.remove(this.tag.id)) {
+        alert("已删除标签");
+        this.$router.back();
+      }
+    }
+  }
+  goBack() {
+    this.$router.back();
   }
 }
 </script>
