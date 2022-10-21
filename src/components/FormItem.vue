@@ -5,8 +5,8 @@
       <input
         type="text"
         v-model="value"
-        :content="this.content"
-        :placeholder="this.placeHolder"
+        :content="content"
+        :placeholder="placeHolder"
       />
     </label>
   </div>
@@ -22,10 +22,6 @@ export default class FormItem extends Vue {
   @Prop({ required: false }) fieldName?: string | undefined;
   @Prop({ required: false }) placeHolder?: string | undefined;
   @Prop({ required: false }) content?: string;
-  @Watch("value")
-  onValueChanged(value: string) {
-    this.$emit("update:value", value);
-  }
 }
 </script>
 
