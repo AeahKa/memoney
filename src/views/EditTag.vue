@@ -8,8 +8,9 @@
       <editing
         class="editing"
         fieldName="标签名："
-        :content="this.tag.name"
+        :content="tag.name"
         @update:value="update"
+        placeHolder="请输入标签名"
       />
       <div class="button-wrapper">
         <Button @click="remove">删除标签</Button>
