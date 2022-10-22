@@ -24,18 +24,26 @@
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
 import Button from "../components/Button.vue";
-import store from "../store/index2";
 
 @Component({
   components: { Button },
+  computed: {
+    tags() {
+      // TODO
+      // return this.$store.tagList;
+      return [];
+    },
+  },
 })
 export default class Tags extends Vue {
-  tags = store.tagList;
+  //TODO
+  // tags = store.tagList;
   name = "Settings";
   newTag() {
     const name = window.prompt("请输入标签名") as string;
     if (name) {
-      store.newTag(name);
+      // TODO
+      // store.newTag(name);
     }
   }
 }

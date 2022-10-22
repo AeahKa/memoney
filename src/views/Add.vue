@@ -20,21 +20,27 @@ import Calculator from "./Add/Calculator.vue";
 import Remark from "../components/FormItem.vue";
 import Tags from "./Add/Tags.vue";
 import Type from "./Add/Type.vue";
-import store from "../store/index2";
 
 @Component({
   components: { Calculator, Type, Remark, Tags },
+  computed: {
+    billList() {
+      return this.$store.state.billList;
+    },
+  },
 })
 export default class Add extends Vue {
   name = "Add";
 
-  billList = store.billList;
   bill: Bill = {
     tags: [],
     remark: "",
     type: "-",
     amount: 0,
   };
+  created() {
+    this.$store.commit("fetchBills");
+  }
 
   onUpdateRemark(value: string) {
     this.bill.remark = value;
@@ -43,7 +49,7 @@ export default class Add extends Vue {
     this.bill.amount = parseFloat(value);
   }
   submit() {
-    store.newBill(this.bill);
+    this.$store.commit("newBill", this.bill);
   }
 }
 </script>
