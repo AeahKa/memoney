@@ -8,7 +8,7 @@
         @update:value="onUpdateRemark"
         placeHolder="备注"
       />
-      <tags :data-source.sync="tags" @update:value="UpdateTag" />
+      <tags />
     </Layout>
   </div>
 </template>
@@ -28,7 +28,6 @@ import store from "../store/index2";
 export default class Add extends Vue {
   name = "Add";
 
-  tags = store.tagList;
   billList = store.billList;
   bill: Bill = {
     tags: [],
@@ -37,9 +36,6 @@ export default class Add extends Vue {
     amount: 0,
   };
 
-  onUpdateTags(value: string[]) {
-    this.bill.tags = value;
-  }
   onUpdateRemark(value: string) {
     this.bill.remark = value;
   }
