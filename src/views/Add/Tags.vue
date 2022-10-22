@@ -19,7 +19,7 @@
 <script lang="ts">
 import store from "../../store/index2";
 import Vue from "vue";
-import { Component, Prop, Watch } from "vue-property-decorator";
+import { Component } from "vue-property-decorator";
 
 @Component
 export default class Tags extends Vue {
@@ -40,14 +40,9 @@ export default class Tags extends Vue {
     const name = window.prompt("请输入标签名") as string;
     if (name === "") {
       window.alert("标签名不能为空");
-      return;
     } else {
       store.newTag(name);
     }
-  }
-  @Watch("selectedTags")
-  onValueChanged(value: string[]) {
-    this.$emit("update:value", value);
   }
 }
 </script>

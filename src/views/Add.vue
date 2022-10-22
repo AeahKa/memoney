@@ -1,14 +1,14 @@
 <template>
   <div>
     <Layout classPrefix="layout">
-      <calculator @update:value="onUpdateAmount" @submit="submit" />
-      <type :value.sync="bill.type" />
-      <remark
+      <Calculator @update:value="onUpdateAmount" @submit="submit" />
+      <Type :value.sync="bill.type" />
+      <Remark
         class="remark"
         @update:value="onUpdateRemark"
         placeHolder="备注"
       />
-      <tags />
+      <Tags :value.sync="bill.tags" />
     </Layout>
   </div>
 </template>
