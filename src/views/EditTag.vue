@@ -8,7 +8,7 @@
       <editing
         class="editing"
         fieldName="标签名："
-        :content="tag.name"
+        :content="currentTag.name"
         @update:value="update"
         placeHolder="请输入标签名"
       />
@@ -29,29 +29,25 @@ import { Component } from "vue-property-decorator";
   components: { Editing, Button },
 })
 export default class EditTag extends Vue {
-  get tag() {
+  get currentTag() {
     return this.$store.state.currentTag;
   }
   created() {
+    this.$store.commit("fetchTags");
     this.$store.commit("getCurrentTag", this.$route.params.id);
-    if (!this.tag) {
+    if (!this.currentTag) {
       this.$router.replace("/404");
     }
   }
   update(name: string) {
-    if (this.tag) {
-      // TODO
-      // store.updateTag(this.tag.id, name);
+    if (this.currentTag) {
+      this.$store.commit("updateTag", { id: this.currentTag.id, name });
     }
   }
   remove() {
-    if (this.tag) {
-      // TODO
-      return;
-      // if (store.removeTag(this.tag.id)) {
-      //   alert("已删除标签");
-      //   this.$router.back();
-      // }
+    if (this.currentTag) {
+      this.$store.commit("removeTag", this.currentTag.id);
+      this.goBack();
     }
   }
   goBack() {
