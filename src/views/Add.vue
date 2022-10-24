@@ -23,14 +23,13 @@ import Type from "./Add/Type.vue";
 
 @Component({
   components: { Calculator, Type, Remark, Tags },
-  computed: {
-    billList() {
-      return this.$store.state.billList;
-    },
-  },
 })
 export default class Add extends Vue {
   name = "Add";
+
+  get billList() {
+    return this.$store.state.billList;
+  }
 
   bill: Bill = {
     tags: [],

@@ -29,14 +29,12 @@ import TagHelper from "@/mixins/TagHelper";
 
 @Component({
   components: { Button },
-  computed: {
-    tags() {
-      return this.$store.state.tagList;
-    },
-  },
 })
 export default class Settings extends mixins(TagHelper) {
   name = "Settings";
+  get tags() {
+    return this.$store.state.tagList;
+  }
   created() {
     this.$store.commit("fetchTags");
   }

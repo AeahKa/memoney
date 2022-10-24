@@ -5,11 +5,17 @@ import createId from '../lib/idCreator'
 
 Vue.use(Vuex)
 
+type RootState = {
+	billList: Bill[]
+	tagList: Tag[]
+	currentTag?: Tag
+}
 const store = new Vuex.Store({
 	state: {
-		billList: [] as Bill[],
-		tagList: [] as Tag[],
-	},
+		billList: [],
+		tagList: [],
+		currentTag: undefined,
+	} as RootState,
 	mutations: {
 		fetchBills(state) {
 			state.billList = JSON.parse(
@@ -34,17 +40,18 @@ const store = new Vuex.Store({
 			const tagNames = state.tagList.map((item) => item.name)
 			if (tagNames.indexOf(name) >= 0) {
 				window.alert('无法创建重复标签')
-				return 'duplicated'
 			} else {
 				const id = createId().toString()
 				state.tagList.push({ id: id, name: name })
 				store.commit('saveTags')
 				window.alert('添加成功')
-				return 'succeed'
 			}
 		},
 		saveTags(state) {
 			window.localStorage.setItem('tagList', JSON.stringify(state.tagList))
+		},
+		getCurrentTag(state, id) {
+			state.currentTag = state.tagList.filter((t) => t.id === id)[0]
 		},
 	},
 })

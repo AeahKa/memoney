@@ -25,13 +25,15 @@ import Button from "../components/Button.vue";
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
 
-@Component({ components: { Editing, Button } })
+@Component({
+  components: { Editing, Button },
+})
 export default class EditTag extends Vue {
-  tag?: { id: string; name: string } = undefined;
-
+  get tag() {
+    return this.$store.state.currentTag;
+  }
   created() {
-    // TODO
-    // this.tag = store.findTag(this.$route.params.id);
+    this.$store.commit("getCurrentTag", this.$route.params.id);
     if (!this.tag) {
       this.$router.replace("/404");
     }
