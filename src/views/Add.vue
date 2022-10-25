@@ -16,10 +16,10 @@
 <script lang="ts">
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
-import Calculator from "./Add/Calculator.vue";
+import Calculator from "../components/Add/Calculator.vue";
 import Remark from "../components/FormItem.vue";
-import Tags from "./Add/Tags.vue";
-import Type from "./Add/Type.vue";
+import Tags from "../components/Add/Tags.vue";
+import Type from "../components/Add/Type.vue";
 
 @Component({
   components: { Calculator, Type, Remark, Tags },
