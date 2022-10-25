@@ -2,7 +2,12 @@
   <div>
     <Layout classPrefix="layout">
       <Calculator @update:value="onUpdateAmount" @submit="submit" />
-      <Type :value.sync="bill.type" />
+      <Tabs
+        :dataSource="typeList"
+        classPrefix="types"
+        class="types"
+        :value.sync="type"
+      />
       <Remark
         class="remark"
         @update:value="onUpdateRemark"
@@ -19,13 +24,16 @@ import { Component } from "vue-property-decorator";
 import Calculator from "../components/Add/Calculator.vue";
 import Remark from "../components/FormItem.vue";
 import Tags from "../components/Add/Tags.vue";
-import Type from "../components/Add/Type.vue";
+import Tabs from "@/components/Tabs.vue";
+import typeList from "../constants/typeList";
 
 @Component({
-  components: { Calculator, Type, Remark, Tags },
+  components: { Calculator, Tabs, Remark, Tags },
 })
 export default class Add extends Vue {
   name = "Add";
+  typeList = typeList;
+  type = "-";
 
   get billList() {
     return this.$store.state.billList;

@@ -22,23 +22,17 @@
 <script lang="ts">
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
-import Type from "../components/Add/Type.vue";
 import Tabs from "../components/Tabs.vue";
+import typeList from "../constants/typeList";
+import cycleList from "../constants/cycleList";
 @Component({
-  components: { Type, Tabs },
+  components: { Tabs },
 })
 export default class Statement extends Vue {
+  typeList = typeList;
   type = "-";
+  cycleList = cycleList;
   cycle = "daily";
-  typeList = [
-    { text: "支出", value: "-" },
-    { text: "收入", value: "+" },
-  ];
-  cycleList = [
-    { text: "日账单", value: "daily" },
-    { text: "周账单", value: "weekly" },
-    { text: "月账单", value: "monthly" },
-  ];
 }
 </script>
 

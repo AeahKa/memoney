@@ -2,7 +2,7 @@
   <ul class="tabs">
     <li
       :class="{
-        [classPrefix + '-item']: classPrefix,
+        [classPrefix + '-tabs-item']: classPrefix,
         selected: value === item.value,
       }"
       @click="select(item)"
