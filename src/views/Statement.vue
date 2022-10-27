@@ -9,7 +9,9 @@
       />
       <ol class="statement">
         <li class="date" v-for="(group, index) in groupedList" :key="index">
-          <h3 class="title">{{ dateBeautify(group.title) }}</h3>
+          <h3 class="title">
+            {{ dateBeautify(group.title) }}<span>￥{{ group.total }}</span>
+          </h3>
           <ol class="billList">
             <li class="bill" v-for="item in group.items" :key="item.id">
               <span class="tags">{{ tagName(item.tags) }}</span>
@@ -30,7 +32,6 @@ import copy from "@/lib/copy";
 import { Component } from "vue-property-decorator";
 import Tabs from "../components/Tabs.vue";
 import typeList from "../constants/typeList";
-import cycleList from "../constants/cycleList";
 
 @Component({
   components: { Tabs },
@@ -77,7 +78,8 @@ export default class Statement extends Vue {
     if (oBillList.length === 0) {
       return [];
     }
-    const result = [
+    type Result = [{ title: string; items: Bill[]; total?: number }];
+    const result: Result = [
       {
         title: dayjs(oBillList[0].createdAt).format("YYYY-MM-DD"),
         items: [oBillList[0]],
@@ -96,8 +98,9 @@ export default class Statement extends Vue {
         });
       }
     }
-    console.log(result);
-
+    result.map((group) => {
+      group.total = group.items.reduce((sum, item) => sum + item.amount, 0);
+    });
     return result;
   }
   beforeCreate() {
@@ -105,8 +108,6 @@ export default class Statement extends Vue {
   }
   typeList = typeList;
   type = "-";
-  cycleList = cycleList;
-  cycle = "daily";
 }
 </script>
 
