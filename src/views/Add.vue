@@ -6,7 +6,7 @@
         :dataSource="typeList"
         classPrefix="types"
         class="types"
-        :value.sync="type"
+        :value.sync="bill.type"
       />
       <Remark
         class="remark"
