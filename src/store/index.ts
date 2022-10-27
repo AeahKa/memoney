@@ -5,11 +5,6 @@ import createId from '../lib/idCreator'
 
 Vue.use(Vuex)
 
-type RootState = {
-	billList: Bill[]
-	tagList: Tag[]
-	currentTag?: Tag
-}
 const store = new Vuex.Store({
 	state: {
 		billList: [],
@@ -24,7 +19,7 @@ const store = new Vuex.Store({
 		},
 		newBill(state, bill) {
 			const billCopy: Bill = copy(bill)
-			billCopy.createdAt = new Date()
+			billCopy.createdAt = new Date().toISOString()
 			state.billList.push(billCopy)
 			store.commit('saveBills')
 		},

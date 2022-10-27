@@ -18,7 +18,7 @@ const billStore = {
 	},
 	newBill(bill: Bill) {
 		const billCopy: Bill = copy(bill)
-		billCopy.createdAt = new Date()
+		billCopy.createdAt = new Date().toISOString()
 		this.billList && this.billList.push(billCopy)
 		billStore.saveBill()
 	},
