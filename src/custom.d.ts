@@ -1,5 +1,5 @@
 declare type Bill = {
-	tags: string[] | undefined
+	tags: Tag[]
 	remark: string
 	type: string
 	amount: number

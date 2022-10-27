@@ -7,15 +7,9 @@
         class="types"
         :value.sync="type"
       />
-      <Tabs
-        :dataSource="cycleList"
-        classPrefix="cycle"
-        class="cycle"
-        :value.sync="cycle"
-      />
       <ol class="statement">
-        <li class="date" v-for="group in result" :key="group.title">
-          <h3 class="title">{{ group.title }}</h3>
+        <li class="date" v-for="(group, index) in groupedList" :key="index">
+          <h3 class="title">{{ dateBeautify(group.title) }}</h3>
           <ol class="billList">
             <li class="bill" v-for="item in group.items" :key="item.id">
               <span class="tags">{{ tagName(item.tags) }}</span>
@@ -31,6 +25,8 @@
 
 <script lang="ts">
 import Vue from "vue";
+import dayjs from "dayjs";
+import copy from "@/lib/copy";
 import { Component } from "vue-property-decorator";
 import Tabs from "../components/Tabs.vue";
 import typeList from "../constants/typeList";
@@ -49,22 +45,60 @@ export default class Statement extends Vue {
     }
     return names.toString().replace(",", "| ");
   }
+  dateBeautify(string: string) {
+    const date = dayjs(string);
+    const now = dayjs();
+    if (date.isSame(now, "day")) {
+      return "今天";
+    } else if (date.isSame(now.subtract(1, "day"), "day")) {
+      return "昨天";
+    } else if (date.isSame(now.subtract(2, "day"), "day")) {
+      return "前天";
+    } else if (date.isSame(now, "year")) {
+      return date.format("M月D日");
+    } else {
+      return date.format("YYYY年M月D日");
+    }
+  }
 
   get billList() {
     return (this.$store.state as RootState).billList;
   }
-  get result() {
+  get groupedList() {
     const { billList } = this;
-
-    type HashTableValue = { title: string; items: Bill[] };
-    const hashTable: { [key: string]: HashTableValue } = {};
-
-    for (let i = 0; i < billList.length; i++) {
-      const [date, time] = billList[i].createdAt!.split("T");
-      hashTable[date] = hashTable[date] || { title: date, items: [] };
-      hashTable[date].items.push(billList[i]);
+    if (billList.length === 0) {
+      return [];
     }
-    return hashTable;
+    const oBillList = copy(billList)
+      .filter((r) => r.type === this.type)
+      .sort(
+        (a, b) => dayjs(b.createdAt).valueOf() - dayjs(a.createdAt).valueOf()
+      );
+    if (oBillList.length === 0) {
+      return [];
+    }
+    const result = [
+      {
+        title: dayjs(oBillList[0].createdAt).format("YYYY-MM-DD"),
+        items: [oBillList[0]],
+      },
+    ];
+
+    for (let i = 1; i < oBillList.length; i++) {
+      const current = oBillList[i];
+      const last = result[result.length - 1];
+      if (dayjs(last.title).isSame(dayjs(current.createdAt), "day")) {
+        last.items.push(current);
+      } else {
+        result.push({
+          title: dayjs(current.createdAt).format("YYYY-MM-DD"),
+          items: [current],
+        });
+      }
+    }
+    console.log(result);
+
+    return result;
   }
   beforeCreate() {
     this.$store.commit("fetchBills");
@@ -80,21 +114,14 @@ export default class Statement extends Vue {
 @import "~@/assets/style/helper.scss";
 
 .types::v-deep .types-tabs-item {
-  background: white;
+  background: #c4c4c4;
   &.selected {
-    background: #c4c4c4;
+    background: #f5f5f5;
     &::after {
       display: none;
     }
   }
 }
-.cycle::v-deep .cycle-tabs-item {
-  font-size: 16px;
-  &.selected {
-    background: #c4c4c4;
-  }
-}
-
 %item {
   padding: 0 16px;
   height: 40px;
