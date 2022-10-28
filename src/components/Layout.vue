@@ -17,13 +17,11 @@ export default {
 
 <style lang="scss" scoped>
 .layout-wrapper {
-  // border: 1px red solid;
   display: flex;
   flex-direction: column;
   height: 100vh;
 }
 .content {
-  // border: 1px red solid;
   overflow: auto;
   flex-grow: 1;
 }
