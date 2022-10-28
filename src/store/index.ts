@@ -25,6 +25,7 @@ const store = new Vuex.Store({
 		},
 		saveBills(state) {
 			window.localStorage.setItem('billList', JSON.stringify(state.billList))
+			alert('已保存')
 		},
 		fetchTags(state) {
 			return (state.tagList = JSON.parse(
