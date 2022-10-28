@@ -25,9 +25,15 @@ const store = new Vuex.Store({
 		},
 		saveBills(state) {
 			window.localStorage.setItem('billList', JSON.stringify(state.billList))
-			alert('已保存')
+			alert('账单已保存')
 		},
 		fetchTags(state) {
+			if (!window.localStorage.getItem('_idMax')) {
+				store.commit('newTag', '饮食')
+				store.commit('newTag', '住宿')
+				store.commit('newTag', '交通')
+				store.commit('newTag', '娱乐')
+			}
 			return (state.tagList = JSON.parse(
 				window.localStorage.getItem('tagList') || '[]'
 			))
@@ -40,7 +46,6 @@ const store = new Vuex.Store({
 				const id = createId().toString()
 				state.tagList.push({ id: id, name: name })
 				store.commit('saveTags')
-				window.alert('添加成功')
 			}
 		},
 		saveTags(state) {
