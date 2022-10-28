@@ -1,6 +1,7 @@
 const path = require('path')
 const { defineConfig } = require('@vue/cli-service')
 module.exports = defineConfig({
+	publicPath: process.env.NODE_ENV === 'production' ? '/memoney-beta/' : '/',
 	transpileDependencies: true,
 	lintOnSave: false,
 	chainWebpack: (config) => {
