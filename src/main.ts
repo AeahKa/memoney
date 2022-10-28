@@ -24,3 +24,15 @@ window.onload = function () {
 		window.scrollTo(0, 99999)
 	}, 0)
 }
+
+if (document.documentElement.clientWidth > 500) {
+	window.alert('请在手机端打开以保证使用体验')
+	const img = document.createElement('img')
+	img.src = '/memoney-qrcode.png'
+	img.style.position = 'absolute'
+	img.style.left = '50%'
+	img.style.top = '50%'
+	img.style.transform = 'translate(-55%,-50%)'
+	img.style.boxShadow = '0 0 10px rgba(0,0,0,0.25)'
+	document.body.appendChild(img)
+}
