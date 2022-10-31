@@ -114,7 +114,7 @@ export default class Calculator extends Vue {
 @import "~@/assets/style/helper.scss";
 
 .calculator {
-  width: 100vw;
+  width: 100%;
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -132,8 +132,8 @@ export default class Calculator extends Vue {
   }
   button {
     @extend %clearfix;
-    width: 20vw;
-    height: 18vw;
+    width: 20%;
+    height: 8vh;
     float: left;
     color: #515151;
     background: rgba(51, 51, 51, 0.034);
@@ -141,7 +141,7 @@ export default class Calculator extends Vue {
     font-size: 22px;
     box-shadow: inset 0 0 2px fade-out($color: #000000, $amount: 0.9);
     &.save {
-      height: 36vw;
+      height: 16vh;
       float: right;
     }
   }
