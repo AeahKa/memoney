@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Layout classPrefix="layout">
+    <Layout classPrefix="layout" ref="layout" :style="{ height: h + 'px' }">
       <Calculator @update:value="onUpdateAmount" @submit="submit" />
       <Tabs
         :dataSource="typeList"
@@ -31,6 +31,7 @@ import typeList from "../constants/typeList";
   components: { Calculator, Tabs, Remark, Tags },
 })
 export default class Add extends Vue {
+  h = document.body.clientHeight;
   name = "Add";
   typeList = typeList;
   type = "-";
